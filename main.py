@@ -9,6 +9,7 @@ def get_same_color(color_1,color_2):
     return "1"
 
 FILE = "video.mp4"
+
 vidcap = cv2.VideoCapture(FILE)
 success, image = vidcap.read()
 cv2.imwrite("exemple.png", image)
@@ -41,14 +42,20 @@ files = []
 for i in range(67):
     files.append(open(str(i)+".txt","w"))
 
-
+begin = False
 while success:
     success, image = vidcap.read()
-    for i in range(len(positions)):
-        pos = positions[i]
-        playing = get_same_color(image[pos[0]][pos[1]], notes[pos])
-        files[i].write(playing)
-    print(f'Read a new frame: ({count}) ', success)
+    if not begin:
+        for i in range(len(positions)):
+            pos = positions[i]
+            if get_same_color(image[pos[0]][pos[1]], notes[pos]) == "1":
+                begin = True
+    if begin:
+        for i in range(len(positions)):
+            pos = positions[i]
+            playing = get_same_color(image[pos[0]][pos[1]], notes[pos])
+            files[i].write(playing)
+        print(f'Read a new frame: ({count}) ', success)
     count += 1
 
 
