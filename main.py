@@ -2,12 +2,26 @@ import cv2
 import pygame
 
 pygame.init()
-
-def get_same_color(color_1,color_2):
-    if abs(color_1[0]-color_2[0]) < 10 and abs(color_1[1]-color_2[1]) < 10 and abs(color_1[2]-color_2[2]) < 10 :
+LIGHT_RIGHT_HAND = (90,225,160)
+DARK_RIGHT_HAND = (25,160,90)
+RIGHT_HAND = [LIGHT_RIGHT_HAND,DARK_RIGHT_HAND]
+LIGHT_LEFT_HAND = (200,170,130)
+DARK_LEFT_HAND = (170,115,65)
+LEFT_HAND = [LIGHT_LEFT_HAND,DARK_LEFT_HAND]
+def get_same_color(color_now,color_2,iterate=True):
+    if abs(color_now[0]-color_2[0]) < 15 and abs(color_now[1]-color_2[1]) < 15 and abs(color_now[2]-color_2[2]) < 15 :
         return "0"
-    return "1"
+    if iterate:
+        return get_hand_playings(LEFT_HAND,RIGHT_HAND,color_now)
+    else:
+        return "1"
 
+def get_hand_playings(left_hand,right_hand,color):
+    print(f"The color is {color}")
+    if get_same_color(left_hand[0],color,iterate=False) == "0" or get_same_color(left_hand[1],color,iterate=False) == "0":
+        return "1"
+    elif get_same_color(right_hand[0],color,iterate=False) == "0" or get_same_color(right_hand[1],color,iterate=False) == "0":
+        return "2"
 FILE = "video.mp4"
 
 vidcap = cv2.VideoCapture(FILE)
