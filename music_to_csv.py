@@ -2,7 +2,7 @@ import csv
 
 LEN_FILES = 67
 MESURE = (4,4)
-MESURE_DURATION = 103
+MESURE_DURATION = 102
 files = []
 for i in range(LEN_FILES):
     with open(str(i) + "_new.txt", "r") as f:
@@ -45,7 +45,7 @@ for i in range(LEN_FILES):
         note_time += 1
 
 
-whole = 103
+whole = 102
 half = round(whole / 2)
 dotted_quarter = round(whole * 3 / 8)
 quarter = round(whole / 4)
@@ -72,7 +72,7 @@ def write_real_notes(times):
         mesure = []
         for note in measure:
             if note[0] == "0":
-                time = round(note[1] / (103/4) / 0.25) * 0.25
+                time = round(note[1] / (whole/4) / 0.25) * 0.25
                 # time = note[1]/(103/4)
             else:
                 time = get_duration(note[1]) + hands[note[0]]
