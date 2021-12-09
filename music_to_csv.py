@@ -100,9 +100,46 @@ def write_real_notes(times):
         final.append(mesure)
     return final
 
+n_measure = []
+med_music = []
+for i in range(len(length)):
+    #with open(str(i) + ".csv", "w") as file:
+        #read = csv.writer(file, delimiter=";")
+        #text = write_real_notes(length[i])
+        #read.writerow(text)
+    n_measure.append(len(length[i]))
+    med_music.append(write_real_notes(length[i]))
 
-for i in range(LEN_FILES):
-    with open(str(i) + ".csv", "w") as file:
-        read = csv.writer(file, delimiter=";")
-        text = write_real_notes(length[i])
-        read.writerow(text)
+def get_chords(mesure: dict):
+    new_mesure = [note for note in mesure.items()]
+    print(new_mesure)
+    complete_mesure = {"r":[],"l":[]}
+    first_notes = []
+    for note in new_mesure:
+        if type(note[1][0]) != float:
+            first_notes.append(note[0])
+    print(first_notes)
+    # for division in range(16):
+
+
+
+def create_binary_map(mesure:list):
+    binary_map = []
+    for element in mesure:
+        if type(element) == float:
+            while element != 0.0:
+                binary_map.append(0)
+                element -= 0.25
+        elif type(element) == str:
+            hand = element[-1]
+
+
+final_music = []
+for measure in range(len(med_music[0])):
+    a = {}
+    for note in range(len(med_music)):
+        mesure = med_music[note][measure]
+        if mesure[0] != 4.0:
+            a[note] = mesure
+    final_music.append(a)
+print(get_chords(final_music[0]))

@@ -4,9 +4,14 @@ LEN_FILES = 67
 
 files = []
 n_measure = []
+def get_chords(mesure: dict):
+    notes = [note[1] for note in mesure.items()]
+    print(notes)
+
+
 for i in range(LEN_FILES):
-    file = open(str(i)+".csv","r")
-    reader = csv.reader(file,delimiter=";")
+    file = open(str(i)+".csv", "r")
+    reader = csv.reader(file, delimiter=";")
     m = []
     for row in reader:
         m.append(row)
@@ -22,5 +27,6 @@ for measure in range(len(files[0])):
             a[note] = mesure
     final_music.append(a)
 print(final_music)
-print(mesure for mesure in final_music)
+print(get_chords(final_music[0]))
+
 
