@@ -4,11 +4,14 @@
     "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="3.1">
   <part-list>
-    <score-part id="P1">
-      <part-name>Music</part-name>
+    <score-part id="R">
+      <part-name>right-hand</part-name>
+    </score-part>
+    <score-part id="L">
+      <part-name>left-hand</part-name>
     </score-part>
   </part-list>
-  <part id="P1">
+  <part id="R">
     <measure number="1">
       <attributes>
         <divisions>2</divisions>
@@ -19,15 +22,11 @@
           <beats>4</beats>
           <beat-type>4</beat-type>
         </time>
-        <staves>2</staves>
+        <staves>1</staves>
         <clef number="1">
           <sign>G</sign>
           <line>2</line>
           </clef>
-        <clef number="2">
-          <sign>F</sign>
-          <line>4</line>
-        </clef>
 
       </attributes>
       <note>
@@ -35,133 +34,81 @@
           <step>C</step>
           <octave>4</octave>
         </pitch>
-        <staff>1</staff>
         <duration>2</duration>
         <voice>1</voice>
         <type>quarter</type>
       </note>
       <note>
-        <chord/>
+        <rest/>
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>half</type>
+      </note>
+      <note>
         <pitch>
           <step>E</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>2</duration>
+        <voice>1</voice>
+        <type>quarter</type>
+      </note>
+    </measure>
+  </part>
+    <part id="L">
+      <measure number="1">
+        <attributes>
+        <divisions>2</divisions>
+        <key>
+          <fifths>0</fifths>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <staves>1</staves>
+        <clef number="1">
+          <sign>F</sign>
+          <line>4</line>
+          </clef>
+        </attributes>
+      <note>
+        <pitch>
+          <step>G</step>
           <octave>2</octave>
         </pitch>
-        <staff>2</staff>
-        <duration>1</duration>
-        <voice>2</voice>
-        <type>eighth</type>
-      </note>
-      <note>
-        <pitch>
-          <step>E</step>
-          <octave>4</octave>
-        </pitch>
-        <staff>1</staff>
-        <duration>1</duration>
-        <voice>2</voice>
-        <type>eighth</type>
-      </note>
-      <note>
-        <pitch>
-          <step>C</step>
-          <octave>4</octave>
-        </pitch>
-        <staff>1</staff>
         <duration>2</duration>
         <voice>1</voice>
         <type>quarter</type>
       </note>
-      <note>
+        <note>
         <pitch>
-          <step>C</step>
-          <octave>4</octave>
+          <step>G</step>
+          <octave>2</octave>
         </pitch>
-        <staff>1</staff>
         <duration>2</duration>
         <voice>1</voice>
         <type>quarter</type>
       </note>
-      <note>
+        <note>
         <pitch>
-          <step>C</step>
-          <octave>4</octave>
+          <step>G</step>
+          <octave>2</octave>
         </pitch>
-        <staff>1</staff>
+        <duration>2</duration>
+        <voice>1</voice>
+        <type>quarter</type>
+      </note>
+        <note>
+        <pitch>
+          <step>G</step>
+          <octave>2</octave>
+        </pitch>
         <duration>2</duration>
         <voice>1</voice>
         <type>quarter</type>
       </note>
 
-      <note>
-        <pitch>
-          <step>E</step>
-          <octave>4</octave>
-        </pitch>
-        <staff>1</staff>
-        <duration>1</duration>
-        <voice>2</voice>
-        <type>eighth</type>
-      </note>
-      <note>
-        <pitch>
-          <step>E</step>
-          <octave>4</octave>
-        </pitch>
-        <staff>1</staff>
-        <duration>1</duration>
-        <voice>2</voice>
-        <type>eighth</type>
-      </note>
-      <note>
-        <pitch>
-          <step>E</step>
-          <octave>4</octave>
-        </pitch>
-        <staff>1</staff>
-        <duration>1</duration>
-        <voice>2</voice>
-        <type>eighth</type>
-      </note>
-      <note>
-        <pitch>
-          <step>E</step>
-          <octave>4</octave>
-        </pitch>
-        <staff>1</staff>
-        <duration>1</duration>
-        <voice>2</voice>
-        <type>eighth</type>
-      </note>
-      <note>
-        <pitch>
-          <step>E</step>
-          <octave>4</octave>
-        </pitch>
-        <staff>1</staff>
-        <duration>1</duration>
-        <voice>2</voice>
-        <type>eighth</type>
-      </note>
-      <note>
-        <pitch>
-          <step>E</step>
-          <octave>4</octave>
-        </pitch>
-        <staff>1</staff>
-        <duration>1</duration>
-        <voice>2</voice>
-        <type>eighth</type>
-      </note>
-      <note>
-        <pitch>
-          <step>E</step>
-          <octave>4</octave>
-        </pitch>
-        <staff>1</staff>
-        <duration>1</duration>
-        <voice>2</voice>
-        <type>eighth</type>
-      </note>
       </measure>
 
   </part>
