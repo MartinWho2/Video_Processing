@@ -31,3 +31,6 @@ for i in range(LEN_FILES):
     file.close()
     new_file = open(str(i)+"_new.txt","w")
     new_file.write(text[:end])
+
+a= "abcde"
+print(a[1:3])
