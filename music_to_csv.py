@@ -225,7 +225,16 @@ for measure in range(len(med_music[0])):
             a[note] = mesure
     final_music.append(a)
 print(final_music)
-print(get_chords(final_music[-1]))
+
+for measure in final_music:
+    hands = {"r":[],"l":[]}
+    for key in measure.items():
+        key_number = key[0]
+        for note in key[1]:
+            if type(note)== str:
+                hands[note[0]].append([key_number,note])
+# This whole method sucks but I have no idea how to make it any better
+# I need to get from a measure that has keys identified separately (as if it was a voice) to a measure where they are all combined IRT
 
 
 
@@ -238,7 +247,7 @@ for key in length:
 partition = ET.Element("score-partwise")
 partition.set("version", "3.1")
 part_list = ET.SubElement(partition, "part-list")
-for i in range(LEN_FILES):
+for i in range(0):
     part_id = str(i)
     key_from_id = get_note_from_index(i)
     part_in_list = ET.SubElement(part_list, "score-part")
@@ -340,8 +349,8 @@ for i in range(LEN_FILES):
                             duration.text = str(name_to_dur[silence[1]] * 4)
                             type_note.text = silence[1]
 
-mydata = ET.tostring(partition)
-myfile = open("partition.xml", "wb")
-myfile.write(mydata)
+#mydata = ET.tostring(partition)
+#myfile = open("partition.xml", "wb")
+#myfile.write(mydata)
 
 
