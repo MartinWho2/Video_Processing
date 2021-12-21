@@ -52,12 +52,12 @@ dotted_half = round(whole*3/4)
 dotted_quarter = round(whole * 3 / 8)
 quarter = round(whole / 4)
 eighth = round(whole / 8)
-# dotted_eighth = round(whole * 3 / 16)
-#sixteenth = round(whole / 16)
+dotted_eighth = round(whole * 3 / 16)
+sixteenth = round(whole / 16)
 notes = {whole: "whole",dotted_half:"dotted_half", half: "half", dotted_quarter: "dotted_quarter", quarter: "quarter",
-         eighth: "eighth"}
+         eighth: "eighth",dotted_eighth:"dotted_eighth",sixteenth:"sixteenth"}
 
-durations = [whole, dotted_half, half, dotted_quarter, quarter, eighth]
+durations = [whole, dotted_half, half, dotted_quarter, quarter, dotted_eighth, eighth, sixteenth]
 
 name_to_dur = {"whole": 4,"dotted_half": 3, "half": 2, "dotted_quarter": 1.5, "quarter": 1, "eighth": 0.5, "dotted_eighth": 0.75,
                "sixteenth": 0.25}
@@ -83,8 +83,9 @@ def get_silence(silence:int):
     return [first_note, second_note]
 
 
-def get_duration(note):
-    return notes[min(durations, key=lambda x: abs(x - note))]
+def get_duration(note_length):
+    print(min(durations, key=lambda x: abs(x - note_length)))
+    return notes[min(durations, key=lambda x: abs(x - note_length))]
 
 hands = {"1": "l", "2": "r"}
 
@@ -146,6 +147,7 @@ for i in range(len(length)):
     # read.writerow(text)
     n_measure.append(len(length[i]))
     med_music.append(write_real_notes(length[i]))
+
 def get_silence_before(mesure:list, index:int):
     silence = 0
     for i in range(len(mesure)):
@@ -227,12 +229,12 @@ for measure in range(len(med_music[0])):
 print(final_music)
 
 for measure in final_music:
-    hands = {"r":[],"l":[]}
+    hands_parts = {"r":[],"l":[]}
     for key in measure.items():
         key_number = key[0]
         for note in key[1]:
             if type(note)== str:
-                hands[note[0]].append([key_number,note])
+                hands_parts[note[0]].append([key_number,note])
 # This whole method sucks but I have no idea how to make it any better
 # I need to get from a measure that has keys identified separately (as if it was a voice) to a measure where they are all combined IRT
 
@@ -247,7 +249,7 @@ for key in length:
 partition = ET.Element("score-partwise")
 partition.set("version", "3.1")
 part_list = ET.SubElement(partition, "part-list")
-for i in range(0):
+for i in range(LEN_FILES):
     part_id = str(i)
     key_from_id = get_note_from_index(i)
     part_in_list = ET.SubElement(part_list, "score-part")
@@ -304,11 +306,11 @@ for i in range(0):
                     voice.text = "1"
                     type_note = ET.SubElement(note, "type")
                     if element[1:8] == "dotted_":
-                        duration.text = str(name_to_dur[element[1:]] * 6)
+                        duration.text = str(int(name_to_dur[element[8:]] * 6))
                         type_note.text = str(element[8:])
                         dot = ET.SubElement(note,"dot")
                     else:
-                        duration.text = str(name_to_dur[element[1:]] * 4)
+                        duration.text = str(int(name_to_dur[element[1:]] * 4))
                         type_note.text = element[1:]
                 else:
                     note = ET.SubElement(xml_measure, "note")
@@ -320,20 +322,20 @@ for i in range(0):
                     silence = get_silence(element)
                     if type(silence) == str:
                         if silence[:7] == "dotted_":
-                            duration.text = str(name_to_dur[silence] * 6)
+                            duration.text = str(int(name_to_dur[silence] * 4))
                             type_note.text = str(silence[7:])
                             dot = ET.SubElement(note,"dot")
                         else:
-                            duration.text = str(name_to_dur[silence] * 4)
+                            duration.text = str(int(name_to_dur[silence] * 4))
                             type_note.text = silence
                     elif type(silence) == list:
                         note_1 = silence[0]
                         if note_1[:7] == "dotted_":
-                            duration.text = str(name_to_dur[note_1] * 6)
+                            duration.text = str(int(name_to_dur[note_1] * 4))
                             type_note.text = str(note_1[7:])
                             dot = ET.SubElement(note,"dot")
                         else:
-                            duration.text = str(name_to_dur[note_1] * 4)
+                            duration.text = str(int(name_to_dur[note_1] * 4))
                             type_note.text = note_1
                         note = ET.SubElement(xml_measure, "note")
                         rest = ET.SubElement(note, "rest")
@@ -342,15 +344,15 @@ for i in range(0):
                         voice.text = "1"
                         type_note = ET.SubElement(note, "type")
                         if silence[1][:7] == "dotted_":
-                            duration.text = str(name_to_dur[silence[1]] * 6)
+                            duration.text = str(int(name_to_dur[silence[1]] * 4))
                             type_note.text = silence[1][7:]
                             dot = ET.SubElement(note,"dot")
                         else:
-                            duration.text = str(name_to_dur[silence[1]] * 4)
+                            duration.text = str(int(name_to_dur[silence[1]] * 4))
                             type_note.text = silence[1]
 
-#mydata = ET.tostring(partition)
-#myfile = open("partition.xml", "wb")
-#myfile.write(mydata)
+mydata = ET.tostring(partition)
+myfile = open("partition.xml", "wb")
+myfile.write(mydata)
 
 
